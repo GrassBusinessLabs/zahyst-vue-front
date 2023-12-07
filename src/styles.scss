@@ -1,0 +1,11 @@
+.Vue-Toastification__container.toast-dialog-container {
+  width: 300px;
+  left: auto;
+  right: 15px;
+  top: 15px;
+
+  & .toast-dialog-error, & .toast-dialog-info {
+    border-radius: 15px;
+    min-width: 300px;
+  }
+}

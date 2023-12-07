@@ -1,0 +1,23 @@
+{
+  "INPUTS": {
+    "EMAIL": "Email",
+    "PASSWORD": "Пароль",
+    "TITLE": "Заголовок",
+    "TEXT": "Текст"
+  },
+  "BTNS": {
+    "SIGN_IN": "Увійти",
+    "LOGOUT": "Вийти",
+    "ADD_POST": "Додати пост"
+  },
+  "LANGUAGES": {
+    "ENGLISH": "Англійська",
+    "UKRAINIAN": "Українська"
+  },
+  "ERRORS": {
+    "SESSION_IS_EXPIRED": "Сеанс закінчився!"
+  },
+  "TEXT": {
+    "PAGE_NOT_FOUND": "404 Сторінку не знайдено"
+  }
+}

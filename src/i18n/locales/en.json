@@ -1,0 +1,23 @@
+{
+  "INPUTS": {
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "TITLE": "Title",
+    "TEXT": "Text"
+  },
+  "BTNS": {
+    "SIGN_IN": "Sign in",
+    "LOGOUT": "Logout",
+    "ADD_POST": "Add post"
+  },
+  "LANGUAGES": {
+    "ENGLISH": "English",
+    "UKRAINIAN": "Ukrainian"
+  },
+  "ERRORS": {
+    "SESSION_IS_EXPIRED": "Session is expired!"
+  },
+  "TEXT": {
+    "PAGE_NOT_FOUND": "404 Page not found"
+  }
+}
