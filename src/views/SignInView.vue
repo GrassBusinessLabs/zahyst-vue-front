@@ -64,25 +64,25 @@ const routing = useRouting()
 const userStore = useUserStore()
 const {setCurrentUser} = userStore
 
-const {vuetifyConfig, usernameValidator, passwordValidator} = formService()
+const {vuetifyConfig, emailValidator, passwordValidator} = formService()
 const request = requestService()
 const authToken = authTokenService()
 
 const form = useForm({
    validationSchema: toTypedSchema(
       yup.object({
-         username: usernameValidator(),
+         email: emailValidator(),
          password: passwordValidator()
       })
    ),
    initialValues: {
-      username: 'kminchelle',
-      password: '0lelplR'
+      email: 'email@gmail.com',
+      password: 'password'
    }
 })
 
 const isSubmitting = ref<boolean>(false)
-const [username, usernameAttrs] = form.defineField('username' as MaybeRefOrGetter, vuetifyConfig)
+const [username, usernameAttrs] = form.defineField('email' as MaybeRefOrGetter, vuetifyConfig)
 const [password, passwordAttrs] = form.defineField('password' as MaybeRefOrGetter, vuetifyConfig)
 
 const showPassword = ref<boolean>(false)
@@ -95,7 +95,7 @@ const submit = form.handleSubmit(async values => {
       isSubmitting.value = true
 
       const body: LoginBody = {
-         username: values.username,
+         email: values.email,
          password: values.password
       }
 

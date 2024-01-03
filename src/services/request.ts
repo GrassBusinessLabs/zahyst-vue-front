@@ -1,5 +1,5 @@
 import {apiService} from '@/services/api'
-import type {AddPostBody, CurrentUser, GetPostsResponse, LoginBody, Post} from '@/models'
+import type {AddPostBody, CurrentUser, GetPostsResponse, LoginBody, Post, Location,  } from '@/models'
 
 export const requestService = () => {
    const api = apiService()
@@ -11,6 +11,12 @@ export const requestService = () => {
    async function getPosts(): Promise<GetPostsResponse> {
       return api.get('/auth/posts')
    }
+   async function getLocations(pageNumber: number) {
+      return api.get('/locations/my?page=' + pageNumber)
+   } 
+   async function createLocation(body: Location){
+      return api.post('/locations', body)
+   }
 
    async function addPost(body: AddPostBody): Promise<Post> {
       // WARNING!!! This request only simulates adding a new post
@@ -19,9 +25,10 @@ export const requestService = () => {
 
    async function getCurrentUser(): Promise<CurrentUser> {
       // WARNING!!! In real projects, this request will look something like this api.get('/users/me')
+
       return login({
-         username: 'kminchelle',
-         password: '0lelplR'
+         email: 'email@gmail.com',
+         password: 'password'
       })
    }
 
@@ -33,6 +40,8 @@ export const requestService = () => {
       login,
       getPosts,
       getCurrentUser,
+      getLocations,
+      createLocation,
       logout,
       addPost
    }

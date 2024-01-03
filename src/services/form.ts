@@ -4,11 +4,11 @@ import {
    MAX_PASS_LEN,
    MAX_TEXT_LEN,
    MAX_TITLE_LEN,
-   MAX_USERNAME_LEN,
+   MAX_EMAIL_LEN,
    MIN_PASS_LEN,
    MIN_TEXT_LEN,
    MIN_TITLE_LEN,
-   MIN_USERNAME_LEN
+   MIN_EMAIL_LEN
 } from '@/constants'
 
 export const formService = () => {
@@ -20,8 +20,8 @@ export const formService = () => {
       }
    }
 
-   function usernameValidator(required: boolean = true) {
-      const validator = yup.string().min(MIN_USERNAME_LEN).max(MAX_USERNAME_LEN)
+   function emailValidator(required: boolean = true) {
+      const validator = yup.string().min(MIN_EMAIL_LEN).max(MAX_EMAIL_LEN).email()
       return required ? validator.required() : validator
    }
 
@@ -42,7 +42,7 @@ export const formService = () => {
 
    return {
       vuetifyConfig,
-      usernameValidator,
+      emailValidator,
       passwordValidator,
       titleValidator,
       textValidator

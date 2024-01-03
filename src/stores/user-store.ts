@@ -21,10 +21,9 @@ export const useUserStore = defineStore('user', () => {
 
    async function getUserData(): Promise<CurrentUser | null> {
       try {
-         if (currentUser.value?.id) {
+         if (currentUser.value?.user.id) {
             return currentUser.value
          }
-
          const userData: CurrentUser = await request.getCurrentUser()
          setCurrentUser(userData)
 
@@ -68,6 +67,7 @@ export const useUserStore = defineStore('user', () => {
 
    return {
       currentUser,
+      getUserData,
       setCurrentUser,
       populate,
       logout

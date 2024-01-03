@@ -1,6 +1,6 @@
 <template>
    <v-select
-      class='select-lang'
+      class='select-lang pa-2'
       v-model='currentLang'
       :items='langs'
       variant='underlined'

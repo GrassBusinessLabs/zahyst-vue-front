@@ -5,6 +5,7 @@ import {authTokenService} from '@/services'
 import {useToastDialog} from '@/composables'
 import SignInView from '@/views/SignInView.vue'
 import PostsView from '@/views/PostsView.vue'
+import MapView from '@/views/MapView.vue'
 import ErrorView from '@/views/ErrorView.vue'
 
 const toastDialog = useToastDialog()
@@ -22,6 +23,12 @@ const routes: RouteRecordRaw[] = [
       path: '/posts',
       name: 'Posts',
       component: PostsView,
+      meta: {auth: true}
+   },
+   {
+      path: '/map',
+      name: 'Map',
+      component: MapView,
       meta: {auth: true}
    },
    {

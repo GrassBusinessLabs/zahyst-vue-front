@@ -1,10 +1,6 @@
+import type { User } from './user-data'
+
 export interface CurrentUser {
-   id: number
-   email: string
-   firstName: string
-   gender: string
-   image: string
-   lastName: string
    token: string
-   username: string
+   user: User
 }

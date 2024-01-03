@@ -12,7 +12,7 @@ import {authTokenService} from '@/services/auth-token'
 export const apiService = () => {
 
    const authToken = authTokenService()
-   const apiUrl: string = 'https://dummyjson.com/'
+   const apiUrl: string = 'https://zahyst.grassbusinesslabs.tk/api/v1'
 
    const instance: AxiosInstance = axios.create({
       baseURL: apiUrl,

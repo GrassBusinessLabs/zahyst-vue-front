@@ -96,26 +96,26 @@ const isSubmitting = ref<boolean>(false)
 const [title, titleAttrs] = form.defineField('title' as MaybeRefOrGetter, vuetifyConfig)
 const [text, textAttrs] = form.defineField('text' as MaybeRefOrGetter, vuetifyConfig)
 
-onMounted(() => {
-   loadPosts()
-})
+// onMounted(() => {
+//    loadPosts()
+// })
 
-async function loadPosts(): Promise<void> {
-   try {
-      loadingPosts.value = true
+// async function loadPosts(): Promise<void> {
+//    try {
+//       loadingPosts.value = true
 
-      const response: GetPostsResponse = await request.getPosts()
-      posts.value = response.posts
-      lastPostId = response.total
+//       const response: GetPostsResponse = await request.getPosts()
+//       posts.value = response.posts
+//       lastPostId = response.total
 
-      loadingPosts.value = false
-   } catch (e) {
-      console.error(e)
-      handleError(e)
-      posts.value = []
-      loadingPosts.value = false
-   }
-}
+//       loadingPosts.value = false
+//    } catch (e) {
+//       console.error(e)
+//       handleError(e)
+//       posts.value = []
+//       loadingPosts.value = false
+//    }
+// }
 
 const submit = form.handleSubmit(async values => {
    try {
