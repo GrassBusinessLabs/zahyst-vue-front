@@ -3,6 +3,6 @@ export interface Location {
     description: string,
     type: string, 
     address: string,
-    lat: number,
-    lon: number
+    lat: number | undefined,
+    lon: number | undefined
 }

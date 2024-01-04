@@ -9,3 +9,6 @@ export const MAX_TITLE_LEN: number = 50
 
 export const MIN_TEXT_LEN: number = 10
 export const MAX_TEXT_LEN: number = 150
+
+export const MIN_POINT_NAME: number = 1
+export const MIN_POINT_DESCRIPTION: number = 1

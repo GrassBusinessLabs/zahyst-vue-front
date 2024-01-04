@@ -8,34 +8,34 @@
 import {onMounted, onUnmounted, ref} from 'vue'
 import {LngLatLike} from '@tomtom-international/web-sdk-maps'
 
-import {mapService} from '@/services/map'
+
+
+import { mapService } from '@/services/map'
 
 const map = mapService()
 
 const mapContainer = ref<HTMLElement | null>(null)
 
-let startingCoords: LngLatLike = {
-   lat: 48.8622029334991,
-   lng: 32.62480605898742
+async function currentPosition(): Promise<LngLatLike> {
+   return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(
+         (position) => {
+            resolve({
+               lng: position.coords.longitude,
+               lat: position.coords.latitude,
+            });
+         },
+         (error) => {
+            reject(error);
+         }
+      );
+   });
 }
-
-async function currentPosition(): Promise<LngLatLike>{
-   const pos: Promise = await new Promise((resolve, 
-   reject) => {
-      navigator.geolocation.getCurrentPosition
-      (resolve, reject);
-   })
-   return {
-         lng: pos.coords.longitude,
-         lat: pos.coords.latitude,
-   }
-} 
 
 onMounted(async () => {
    if (mapContainer.value) {
       const currentPositionValue = await currentPosition()
-      startingCoords = currentPositionValue
-      map.createMap(mapContainer.value as HTMLElement, {center: startingCoords})
+      map.createMap(mapContainer.value as HTMLElement, {center: currentPositionValue})
    }
 })
 

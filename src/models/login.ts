@@ -1,4 +1,4 @@
 export interface LoginBody {
-   email: string
+   email: string | undefined
    password: string
 }

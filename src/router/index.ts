@@ -4,7 +4,6 @@ import {createRouter, createWebHistory, RouteLocationNormalized} from 'vue-route
 import {authTokenService} from '@/services'
 import {useToastDialog} from '@/composables'
 import SignInView from '@/views/SignInView.vue'
-import PostsView from '@/views/PostsView.vue'
 import MapView from '@/views/MapView.vue'
 import ErrorView from '@/views/ErrorView.vue'
 
@@ -20,9 +19,10 @@ const routes: RouteRecordRaw[] = [
       meta: {auth: false}
    },
    {
-      path: '/posts',
-      name: 'Posts',
-      component: PostsView,
+      path: '/',
+      redirect: '/map',
+      name: 'Home',
+      component: MapView,
       meta: {auth: true}
    },
    {
@@ -57,7 +57,7 @@ router.beforeEach(async (to: RouteLocationNormalized) => {
       }
 
       if (authTokenValue && !metaAuth) {
-         return {name: 'Posts'}
+         return {name: 'Home'}
       }
 
       return true

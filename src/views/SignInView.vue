@@ -95,7 +95,7 @@ const submit = form.handleSubmit(async values => {
       isSubmitting.value = true
 
       const body: LoginBody = {
-         email: values.email,
+         email: values.email?.toString(),
          password: values.password
       }
 
@@ -103,7 +103,7 @@ const submit = form.handleSubmit(async values => {
       setCurrentUser(currentUser)
       await authToken.set(currentUser.token)
 
-      await routing.toPosts()
+      await routing.toMap()
 
       isSubmitting.value = false
    } catch (e) {

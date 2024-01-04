@@ -7,15 +7,15 @@ export const useRouting = () => {
       return router.push('/sign-in')
    }
 
-   async function toPosts() {
-      return router.push('/posts')
-   }
+   // async function toPosts() {
+   //    return router.push('/posts')
+   // }
    async function toMap() {
       return router.push('/map')
    }
    return {
       toSignIn,
-      toPosts,
+      // toPosts,
       toMap
    }
 }

@@ -7,9 +7,9 @@
       item-value='lang'
       @update:modelValue='changeLang($event)'
    >
-      <template v-slot:selection='{ item, index }'>
+      <template v-slot:selection=''>
          <span class='v-select__selection-text'>
-            {{ translate(item.props.title.localizeKey) }}
+            {{ translate('uk') }}
          </span>
       </template>
 

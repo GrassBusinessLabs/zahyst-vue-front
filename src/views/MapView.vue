@@ -29,7 +29,7 @@ const duration: number = 500
 async function selectAddress(address: AddressItem): Promise<void> {
    map.removeAllMarkers()
 
-   const marker: Marker | null = map.createMarker(address.details.id, address.details.position as LngLatLike)
+   const marker: Marker | null = map.createMarker(Number(address.details.id), address.details.position as LngLatLike)
 
    if (marker) {
       map.addMarkerToMap(marker)

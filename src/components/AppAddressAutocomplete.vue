@@ -18,7 +18,7 @@
 
 <script lang='ts' setup>
 import {defineEmits, ref} from 'vue'
-import * as debounce from 'lodash.debounce'
+import debounce from 'lodash.debounce'
 
 import type {AddressItem} from '@/services/map'
 import {mapService} from '@/services/map'
@@ -31,7 +31,7 @@ const map = mapService()
 
 const loading = ref<boolean>(false)
 const addressModel = ref<AddressItem | null>(null)
-const searchModel = ref<string | null>(null)
+const searchModel = ref<string>('')
 const items = ref<AddressItem[]>([])
 
 const debounceSearch = debounce(search, 1000)

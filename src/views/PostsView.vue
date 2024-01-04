@@ -1,5 +1,5 @@
 <template>
-   <home-layout>
+   <!-- <home-layout>
       <v-sheet class='mx-auto'>
          <v-form @submit.prevent='submit'>
             <v-row class='ma-0'>
@@ -47,54 +47,54 @@
             :post='post'
          />
       </v-row>
-   </home-layout>
+   </home-layout> -->
 </template>
 
 <script lang='ts' setup>
-import type {MaybeRefOrGetter, Ref} from 'vue'
-import {onMounted, ref} from 'vue'
-import {useForm} from 'vee-validate'
-import {toTypedSchema} from '@vee-validate/yup'
-import {storeToRefs} from 'pinia'
-import * as yup from 'yup'
+// import type {MaybeRefOrGetter, Ref} from 'vue'
+// import { ref } from 'vue'
+// import {useForm} from 'vee-validate'
+// import {toTypedSchema} from '@vee-validate/yup'
+// import {storeToRefs} from 'pinia'
+// import * as yup from 'yup'
 
-import type {AddPostBody, GetPostsResponse, Post} from '@/models'
-import {formService, requestService} from '@/services'
-import {useHandleError} from '@/composables'
-import {useAppI18n} from '@/i18n'
-import {useUserStore} from '@/stores'
-import HomeLayout from '@/layouts/HomeLayout.vue'
-import AppPost from '@/components/AppPost.vue'
+// import type {AddPostBody, Post} from '@/models'
+// import {formService, requestService} from '@/services'
+// import {useHandleError} from '@/composables'
+// import {useAppI18n} from '@/i18n'
+// import {useUserStore} from '@/stores'
+// import HomeLayout from '@/layouts/HomeLayout.vue'
+// import AppPost from '@/components/AppPost.vue'
 
-const {handleError} = useHandleError()
-const {translate} = useAppI18n()
-const userStore = useUserStore()
-const {currentUser} = storeToRefs(userStore)
+// const {handleError} = useHandleError()
+// const {translate} = useAppI18n()
+// const userStore = useUserStore()
+// const { currentUser } = storeToRefs(userStore)
 
-const request = requestService()
-const {vuetifyConfig, titleValidator, textValidator} = formService()
+// const request = requestService()
+// const {vuetifyConfig, titleValidator, textValidator} = formService()
 
-const posts: Ref<Post[]> = ref<Post[]>([])
-const loadingPosts = ref<boolean>(false)
+// const posts: Ref<Post[]> = ref<Post[]>([])
+// const loadingPosts = ref<boolean>(false)
 
-let lastPostId: number = 0
+// let lastPostId: number = 0
 
-const form = useForm({
-   validationSchema: toTypedSchema(
-      yup.object({
-         title: titleValidator(),
-         text: textValidator()
-      })
-   ),
-   initialValues: {
-      title: '',
-      text: ''
-   }
-})
+// const form = useForm({
+//    validationSchema: toTypedSchema(
+//       yup.object({
+//          title: titleValidator(),
+//          text: textValidator()
+//       })
+//    ),
+//    initialValues: {
+//       title: '',
+//       text: ''
+//    }
+// })
 
-const isSubmitting = ref<boolean>(false)
-const [title, titleAttrs] = form.defineField('title' as MaybeRefOrGetter, vuetifyConfig)
-const [text, textAttrs] = form.defineField('text' as MaybeRefOrGetter, vuetifyConfig)
+// const isSubmitting = ref<boolean>(false)
+// const [title, titleAttrs] = form.defineField('title' as MaybeRefOrGetter, vuetifyConfig)
+// const [text, textAttrs] = form.defineField('text' as MaybeRefOrGetter, vuetifyConfig)
 
 // onMounted(() => {
 //    loadPosts()
@@ -117,34 +117,36 @@ const [text, textAttrs] = form.defineField('text' as MaybeRefOrGetter, vuetifyCo
 //    }
 // }
 
-const submit = form.handleSubmit(async values => {
-   try {
-      if (isSubmitting.value) {
-         return
-      }
-      isSubmitting.value = true
+// const submit = form.handleSubmit(async values => {
+//    try {
+//       if (isSubmitting.value) {
+//          return
+//       }
+//       isSubmitting.value = true
+//       if(currentUser.value != null){
+//          const body: AddPostBody = {
+//             title: values.title,
+//             body: values.text,
+//             userId: currentUser.value.user.id
+//          }
+//       }
 
-      const body: AddPostBody = {
-         title: values.title,
-         body: values.text,
-         userId: currentUser.value.id
-      }
 
-      const post: Post = await request.addPost(body)
-      post.id = lastPostId + 1
-      lastPostId = post.id
+//       const post: Post = await request.addPost(body)
+//       post.id = lastPostId + 1
+//       lastPostId = post.id
 
-      posts.value.unshift(post)
+//       posts.value.unshift(post)
 
-      form.resetForm()
+//       form.resetForm()
 
-      isSubmitting.value = false
-   } catch (e) {
-      console.error(e)
-      handleError(e)
-      isSubmitting.value = false
-   }
-})
+//       isSubmitting.value = false
+//    } catch (e) {
+//       console.error(e)
+//       handleError(e)
+//       isSubmitting.value = false
+//    }
+// })
 </script>
 
 <style lang='scss' scoped>

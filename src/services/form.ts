@@ -8,7 +8,9 @@ import {
    MIN_PASS_LEN,
    MIN_TEXT_LEN,
    MIN_TITLE_LEN,
-   MIN_EMAIL_LEN
+   MIN_EMAIL_LEN,
+   MIN_POINT_NAME,
+   MIN_POINT_DESCRIPTION
 } from '@/constants'
 
 export const formService = () => {
@@ -40,11 +42,23 @@ export const formService = () => {
       return required ? validator.required() : validator
    }
 
+   function pointNameValidator(required: boolean = true) {
+      const validator = yup.string().min(MIN_POINT_NAME)
+      return required ? validator.required() : validator
+   }
+
+   function pointDescriptionValidator(required: boolean = true) {
+      const validator = yup.string().min(MIN_POINT_DESCRIPTION)
+      return required ? validator.required() : validator
+   }
+
    return {
       vuetifyConfig,
       emailValidator,
       passwordValidator,
       titleValidator,
-      textValidator
+      textValidator,
+      pointNameValidator,
+      pointDescriptionValidator
    }
 }

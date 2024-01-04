@@ -31,6 +31,7 @@ import { ref } from 'vue'
 import { mapService } from '@/services/map'
 import { ttmapApi } from '@/services/ttmap-api';
 
+
 const map = mapService()
 const ttmap = ttmapApi()
 
@@ -39,7 +40,9 @@ const sheet = ref(false)
 const currentAddress = ref<string>('')
 
 async function getAdress(){
-  currentAddress.value = await ttmap.getAddressWithLngLat(10, map.getMap()?.getCenter())
+  const center = map.getMap()?.getCenter()
+  if(center != undefined)
+    currentAddress.value = await ttmap.getAddressWithLngLat(10, center)
   sheet.value = !sheet.value
 
 }

@@ -1,4 +1,4 @@
-import * as localforage from 'localforage'
+import localforage from 'localforage'
 
 import type {LocalForage} from '@/models'
 import {APP_NAME} from '@/constants'

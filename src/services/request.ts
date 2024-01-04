@@ -1,5 +1,6 @@
 import {apiService} from '@/services/api'
-import type {AddPostBody, CurrentUser, GetPostsResponse, LoginBody, Post, Location,  } from '@/models'
+import type {AddPostBody, CurrentUser, GetPostsResponse, LoginBody, Post,  } from '@/models'
+import { Location } from '@/models/location'
 
 export const requestService = () => {
    const api = apiService()

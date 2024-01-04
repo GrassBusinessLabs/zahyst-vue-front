@@ -81,7 +81,7 @@ export const mapService = () => {
       return mapKey
    }
 
-   async function createMap(container: HTMLElement, options?: Partial<MapOptions>): Promise<Map> {
+   async function createMap(container: HTMLElement, options?: Partial<MapOptions>) {
       const combineOptions: MapOptions = {
          ...defaultMapOptions,
          ...options
@@ -131,13 +131,13 @@ export const mapService = () => {
       map!.panTo(coords, animationOptions)
    }
 
-   function setZoom(zoom: number = defaultMapOptions.zoom, options?: Partial<AnimationOptions>): void {
+   function setZoom(zoom: number | undefined = defaultMapOptions.zoom, options?: Partial<AnimationOptions>): void {
       const animationOptions: AnimationOptions = {
          duration: 500,
          ...options
       }
-
-      map!.zoomTo(zoom, animationOptions)
+      if(zoom != undefined)
+         map!.zoomTo(zoom, animationOptions)
    }
 
    function getMapZoom(): number {
@@ -150,7 +150,7 @@ export const mapService = () => {
          return null
       }
       const markerElement: HTMLDivElement = document.createElement('div')
-      markerElement.setAttribute('id', id)
+      markerElement.setAttribute('id', id.toString())
       markerElement.classList.add('map-marker', `map-marker_${id}`)
       markerElement.style.setProperty('background-image', `url('${mapMarker}')`)
       const marker: Marker = new tt.Marker({
@@ -163,7 +163,7 @@ export const mapService = () => {
       return marker
    }
 
-   function addMarkerToMap(marker: Marker): void {
+   function addMarkerToMap(marker: Marker | null): void {
       if(marker != null){
          marker.addTo(map!)
       }
@@ -189,7 +189,7 @@ export const mapService = () => {
 
    function removeAllMarkers(): void {
       for (const marker of Object.keys(markers)) {
-         removeMarkerFromMap(marker)
+         removeMarkerFromMap(Number(marker))
       }
 
       markers = {}
@@ -212,10 +212,10 @@ export const mapService = () => {
          idxSet: 'PAD,Addr' // search addresses only
       })
 
-      return response.results.map((el: FuzzySearchResult) => ({
+      return response.results ? response.results.map((el: FuzzySearchResult) => ({
          address: generateAddressStr(el.address),
          details: el
-      }))
+       })) : [];
    }
 
    async function searchCities(text: string, options?: Partial<FuzzySearchOptions>): Promise<CityItem[]> {
@@ -223,14 +223,13 @@ export const mapService = () => {
          ...options,
          entityTypeSet: 'Municipality' // search only municipalities (cities)
       })
-
-      return response.results.map((el: FuzzySearchResult) => ({
+      return response.results ? response.results.map((el: FuzzySearchResult) => ({
          city: generateCityStr(el.address),
          details: el
-      }))
+       })) : [];
    }
 
-   function generateAddressStr(searchResult: SearchAddress): string {
+   function generateAddressStr(searchResult: any): string {
       const segments: string[] = []
 
       if (searchResult?.streetName) {
@@ -252,7 +251,7 @@ export const mapService = () => {
       return segments.join(', ')
    }
 
-   function generateCityStr(searchResult: SearchAddress): string {
+   function generateCityStr(searchResult: any): string {
       const segments: string[] = []
 
       if (searchResult?.municipality) {

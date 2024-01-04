@@ -6,8 +6,6 @@
 </template>
 
 <script lang='ts' setup>
-import AppSelectLang from '@/components/AppSelectLang.vue'
-
 </script>
 
 <style lang='scss' scoped>

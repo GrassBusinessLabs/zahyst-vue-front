@@ -43,12 +43,17 @@
 </template>
 
 <script setup lang="ts">
-import { defineEmits, defineProps, ref, onMounted } from 'vue'
+import { defineEmits, defineProps, ref } from 'vue'
+// import * as yup from 'yup'
+// import {toTypedSchema} from '@vee-validate/yup'
 import { requestService } from '@/services'
 import {useForm} from 'vee-validate'
 import { Location } from '@/models/location'
 import { mapService } from '@/services/map'
 import { ttmapApi } from '@/services/ttmap-api'
+// import { formService } from '@/services'
+
+// const { pointNameValidator, pointDescriptionValidator } = formService()
 
 const map = mapService()
 const ttmap = ttmapApi()
@@ -61,17 +66,31 @@ const valueDescription = ref('')
 
 const isSubmitting = ref<boolean>(false)
 
-const form = useForm()
+const form = useForm({
+//     validationSchema: toTypedSchema(
+//       yup.object({
+//         name: pointNameValidator(),
+//         description: pointDescriptionValidator()
+//       })
+//    ),
+})
 
 const submit = form.handleSubmit(async values => {
    try {
+        console.log(values)
         if (isSubmitting.value) {
             return
         }
         isSubmitting.value = true
         const position = map.getMap()?.getCenter()
 
-        const address = await ttmap.getAddressWithLngLat(10, map.getMap()?.getCenter())
+        const mapCenter = map.getMap()?.getCenter();
+        let address = ''
+        if (mapCenter) {
+            address = await ttmap.getAddressWithLngLat(10, mapCenter);
+        } else {
+            console.error("Map center is undefined or null.");
+        }
         const body: Location = {
             title: valueType.value.toString(),
             description: valueDescription.value.toString(),
@@ -82,7 +101,8 @@ const submit = form.handleSubmit(async values => {
         }
 
         const data = await api.createLocation(body)
-        map.addMarkerToMap(map.createMarker(data.id, position))
+        if(position != undefined)
+            map.addMarkerToMap(map.createMarker(data.id, position))
         form.resetForm()
         isSubmitting.value = false
         emit('closeWindow')
